@@ -1,15 +1,20 @@
+// Including all files to cache
+
 const FILES_TO_CACHE = [
   "/",
-  "db.js",
-  "index.js",
-  "manifest.webmanifest",
+  "/db.js",
+  "/index.js",
+  "/index.html",
+  "/manifest.webmanifest",
   "/style.js",
   "/icons/icon-192x192.png",
   "/icons/icon-512x512.png",
 ];
 
-const CACHE_NAME = "static-cache-v1";
+const CACHE_NAME = "static-cache-v2";
 const DATA_CACHE_NAME = "data-cache-v1";
+
+// Install
 
 self.addEventListener("install", function (event) {
   event.waitUntil(
@@ -19,6 +24,8 @@ self.addEventListener("install", function (event) {
   );
   self.skipWaiting();
 });
+
+// Activate
 
 self.addEventListener("activate", function (event) {
   event.waitUntil(
@@ -34,6 +41,8 @@ self.addEventListener("activate", function (event) {
   );
   self.clients.claim();
 });
+
+// Fetch
 
 self.addEventListener("fetch", (event) => {
   if (event.request.url.includes("/api/")) {
